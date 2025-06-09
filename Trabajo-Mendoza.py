@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-cv2.namedWindow('Video Proyectado',cv2.WINDOW_NORMAL)
+
 # ---------- Función para ordenar los puntos ----------
 def ordenar_puntos(puntos):
     puntos = np.array(puntos, dtype=np.float32)
@@ -78,20 +78,29 @@ while True:
     # Crear máscara para combinar
     mask = np.zeros((h_bg, w_bg), dtype=np.uint8)
     cv2.fillConvexPoly(mask, points_dst.astype(int), 255)
-    cv2.imshow("asi esta la mascara", mask)
+
+    cv2.namedWindow('mascara', cv2.WINDOW_NORMAL)
+    cv2.imshow("mascara", mask)
     mask_inv = cv2.bitwise_not(mask)
-    cv2.imshow("asi esta la mascara invertida", mask_inv)
+
+    cv2.namedWindow('mascara_invertida', cv2.WINDOW_NORMAL)
+    cv2.imshow("mascara_invertida", mask_inv)
 
     # Combinar fondo con el video proyectado
     fondo_visible = cv2.bitwise_and(background, background, mask=mask_inv)
-    cv2.imshow("fondo visible",fondo_visible)
+
+    cv2.namedWindow('fondo_visible', cv2.WINDOW_NORMAL)
+    cv2.imshow("fondo_visible",fondo_visible)
 
     video_visible = cv2.bitwise_and(warped, warped, mask=mask)
-    cv2.imshow("video visible", video_visible)
+
+    cv2.namedWindow('video_visible', cv2.WINDOW_NORMAL)
+    cv2.imshow("video_visible", video_visible)
 
     resultado = cv2.add(fondo_visible, video_visible)
 
-    cv2.imshow("Video Proyectado", resultado)
+    cv2.namedWindow('Video_Proyectado', cv2.WINDOW_NORMAL)
+    cv2.imshow("Video_Proyectado", resultado)
 
     if cv2.waitKey(1) & 0xFF == 27:  # ESC
         break
