@@ -1,0 +1,1 @@
+Este programa usa dos fuentes de video, una mediante la cámara web y otro mediante un archivo de video, y se proyectan en una tercera imagen para dar la impresión de que se están proyectando varias escenas.
